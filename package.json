@@ -121,6 +121,12 @@
                     "type": "number",
                     "default": 0,
                     "description": "Specifies the minimum number of characters required for a section to fold"
+                },
+                "tailwind-fold.experimentalMultilineFold": {
+                    "order": 11,
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enables folding across multiple lines"
                 }
             }
         }

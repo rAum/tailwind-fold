@@ -16,6 +16,7 @@ export enum Settings {
     FoldedTextBackgroundColor = "foldedTextBackgroundColor",
     UnfoldedTextOpacity = "unfoldedTextOpacity",
     FoldLengthThreshold = "foldLengthThreshold",
+    ExperimentalMultilineFold = "experimentalMultilineFold",
 }
 
 export function set(key: Settings, value: any) {

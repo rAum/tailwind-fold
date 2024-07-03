@@ -11,7 +11,11 @@ export class Decorator {
     unfoldIfLineSelected: boolean = false
     supportedLanguages: string[] = []
 
-    regEx = /(class|className)=((({\s*?.*?\()([\s\S]*?)(\)\s*?}))|(({?\s*?(['"`]))([\s\S]*?)(\8|\9\s*?})))/g
+    regEx_default = /(class|className)=((({\s*?.*?\()(.*?)(\)\s*?}))|(({?\s*?(['"`]))(.*?)(\8|\9\s*?})))/g
+    regEx_experimental_multiline =
+        /(class|className)=((({\s*?.*?\()([\s\S]*?)(\)\s*?}))|(({?\s*?(['"`]))([\s\S]*?)(\8|\9\s*?})))/g
+    regEx = this.regEx_default
+
     regExGroupsAll = [0]
     regExGroupsQuotes = [5, 10]
     regExGroups = this.regExGroupsAll
@@ -42,6 +46,9 @@ export class Decorator {
         this.autoFold = Config.get<boolean>(Settings.AutoFold) ?? false
         this.unfoldIfLineSelected = Config.get<boolean>(Settings.UnfoldIfLineSelected) ?? false
         this.supportedLanguages = Config.get<string[]>(Settings.SupportedLanguages) ?? []
+        this.regEx = Config.get<boolean>(Settings.ExperimentalMultilineFold)
+            ? this.regEx_experimental_multiline
+            : this.regEx_default
         this.regExGroups =
             Config.get<string>(Settings.FoldStyle) === "ALL" ? this.regExGroupsAll : this.regExGroupsQuotes
 
